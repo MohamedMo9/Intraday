@@ -27,7 +27,7 @@ def singular(header_name, col, quer):
     col_names = [h[0] for h in crsr.description]
     # Convert to Array
     arr = np.asarray(this_week)
-    f = open('test.csv', 'r')
+    f = open('exported.csv', 'r')
     reader = csv.reader(f)
     mylist = list(reader)
     f.close()
@@ -45,7 +45,7 @@ def singular(header_name, col, quer):
     except IndexError:
         pass
         # saving the work
-    my_new_list = open('test.csv', 'w', newline='')
+    my_new_list = open('exported.csv', 'w', newline='')
     csv_writer = csv.writer(my_new_list)
     csv_writer.writerows(mylist)
     f.close()
@@ -61,7 +61,7 @@ def multiple(header_name, col, quer):
     col_names = [h[0] for h in crsr.description]
     # Convert to Array
     arr = np.asarray(this_week)
-    f = open('test.csv', 'r')
+    f = open('exported.csv', 'r')
     reader = csv.reader(f)
     mylist = list(reader)
     f.close()
@@ -78,7 +78,7 @@ def multiple(header_name, col, quer):
     except IndexError:
         pass
     # saving the work
-    my_new_list = open('test.csv', 'w', newline='')
+    my_new_list = open('exported.csv', 'w', newline='')
     csv_writer = csv.writer(my_new_list)
     csv_writer.writerows(mylist)
     f.close()
@@ -174,4 +174,4 @@ try:
 except Exception as e:
     pass
 
-print("Script is done, please import the file into google sheets")
+print("Absence done")

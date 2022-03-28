@@ -1,0 +1,177 @@
+import snowflake.connector
+import pandas as pd
+import csv
+import numpy as np
+
+#########################################################################
+
+with open('query.csv') as f:
+    lines = f.readlines()
+
+user_email = "mohamed.mohamed@transferwise.com"
+conn = snowflake.connector.connect(user=user_email,
+                                   account='rt27428.eu-central-1',
+                                   authenticator="externalbrowser",
+                                   database='ANALYTICS_DB',  # optional
+                                   schema='REPORTS',  # optional
+                                   warehouse='ANALYSTS',  # optional
+                                   autocommit=True)  # optional
+
+
+########################## TOTAL Calls #################################
+def singular(header_name, col, quer):
+    query = lines[quer]
+    crsr = conn.cursor()
+    query_output = crsr.execute(query, timeout=1500)
+    this_week = query_output.fetchall()
+    col_names = [h[0] for h in crsr.description]
+    # Convert to Array
+    arr = np.asarray(this_week)
+    f = open('test.csv', 'r')
+    reader = csv.reader(f)
+    mylist = list(reader)
+    f.close()
+
+    # Shift the insert location to the right (column 6)
+    start_col = col
+    try:
+        for i in range(0, len(arr)):
+            for x in range(0, len(arr[0])):
+                mylist[0][start_col + x] = header_name
+                mylist[i + 2][start_col + x] = arr[i][x]
+                if i < 1:
+                    mylist[i + 1][start_col + x] = col_names[x]
+
+    except IndexError:
+        pass
+        # saving the work
+    my_new_list = open('test.csv', 'w', newline='')
+    csv_writer = csv.writer(my_new_list)
+    csv_writer.writerows(mylist)
+    f.close()
+    my_new_list.close()
+
+
+############################################################################
+def multiple(header_name, col, quer):
+    query = lines[quer]
+    crsr = conn.cursor()
+    query_output = crsr.execute(query, timeout=1500)
+    this_week = query_output.fetchall()
+    col_names = [h[0] for h in crsr.description]
+    # Convert to Array
+    arr = np.asarray(this_week)
+    f = open('test.csv', 'r')
+    reader = csv.reader(f)
+    mylist = list(reader)
+    f.close()
+    # Shift the insert location to the right (column 6)
+    start_col = col
+    try:
+        for i in range(0, len(arr)):
+            for x in range(0, len(arr[0])):
+                mylist[0][start_col + x] = header_name
+                mylist[i + 2][start_col + x] = arr[i][x]
+                if i < 1:
+                    mylist[i + 1][start_col + x] = col_names[x]
+
+    except IndexError:
+        pass
+    # saving the work
+    my_new_list = open('test.csv', 'w', newline='')
+    csv_writer = csv.writer(my_new_list)
+    csv_writer.writerows(mylist)
+    f.close()
+    my_new_list.close()
+
+try:
+    multiple("Phones", 0, 0)
+except Exception as e:
+    pass
+
+print("Phones volumes done")
+########################################################################
+try:
+    multiple("AHT Leads", 9, 1)
+except Exception as e:
+    pass
+
+print("AHT by lead done")
+########################################################################
+try:
+    multiple("Productivity Emails", 18, 2)
+except Exception as e:
+    pass
+
+print("Email Productivity done")
+########################################################################
+try:
+    multiple("Emails", 26, 3)
+except Exception as e:
+    pass
+
+print("Emails volumes done")
+########################################################################
+try:
+    multiple("Chats", 35, 4)
+except Exception as e:
+    pass
+
+print("Chats done")
+########################################################################
+try:
+    multiple("AHT Chats", 45, 5)
+except Exception as e:
+    pass
+
+print("Chats AHT done")
+########################################################################
+try:
+    multiple("AHT Emails", 50, 6)
+except Exception as e:
+    pass
+
+print("Emails AHT done")
+########################################################################
+try:
+    multiple("Email IS", 56, 7)
+except Exception as e:
+    pass
+
+print("Email IS done")
+
+########################################################################
+try:
+    multiple("Productivity Phones", 64, 8)
+except Exception as e:
+    pass
+
+print("Phones Productivity done")
+########################################################################
+try:
+    multiple("Productivity Chats", 69, 9)
+except Exception as e:
+    pass
+
+print("Chats Productivity done")
+
+########################################################################
+try:
+    multiple("Adherence-Emails", 74, 10)
+except Exception as e:
+    pass
+
+print("Emails Adherence done")
+########################################################################
+try:
+    multiple("Sykes-Chat", 79, 11)
+except Exception as e:
+    pass
+
+########################################################################
+try:
+    multiple("Absence", 82, 12)
+except Exception as e:
+    pass
+
+print("Script is done, please import the file into google sheets")

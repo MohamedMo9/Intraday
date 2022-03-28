@@ -174,4 +174,4 @@ try:
 except Exception as e:
     pass
 
-print("Absence done")
+print("Data is ready, please import the report to google sheets")

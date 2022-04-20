@@ -84,6 +84,8 @@ def multiple(header_name, col, quer):
     f.close()
     my_new_list.close()
 
+
+
 try:
     multiple("Phones", 0, 0)
 except Exception as e:
@@ -92,7 +94,7 @@ except Exception as e:
 print("Phones volumes done")
 ########################################################################
 try:
-    multiple("AHT Leads", 9, 1)
+    multiple("AHT Leads", 8, 1)
 except Exception as e:
     pass
 
@@ -120,14 +122,14 @@ except Exception as e:
 print("Chats done")
 ########################################################################
 try:
-    multiple("AHT Chats", 45, 5)
+    multiple("AHT Chats", 43, 5)
 except Exception as e:
     pass
 
 print("Chats AHT done")
 ########################################################################
 try:
-    multiple("AHT Emails", 50, 6)
+    multiple("AHT Emails", 49, 6)
 except Exception as e:
     pass
 
@@ -168,10 +170,24 @@ try:
 except Exception as e:
     pass
 
+print("Sykes Chats done")
+
 ########################################################################
 try:
     multiple("Absence", 82, 12)
 except Exception as e:
     pass
+
+print("Absence data done")
+
+########################################################################
+try:
+    multiple("Chat-Concurrency", 86, 13)
+except Exception as e:
+    pass
+
+
+
+
 
 print("Data is ready, please import the report to google sheets")

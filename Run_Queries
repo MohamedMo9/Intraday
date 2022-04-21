@@ -8,7 +8,7 @@ import numpy as np
 with open('query.csv') as f:
     lines = f.readlines()
 
-user_email = "mohamed.mohamed@transferwise.com"
+user_email = "USER_NAME@transferwise.com"   #REPLACE WITH YOUR EMAIL
 conn = snowflake.connector.connect(user=user_email,
                                    account='rt27428.eu-central-1',
                                    authenticator="externalbrowser",
@@ -27,7 +27,7 @@ def singular(header_name, col, quer):
     col_names = [h[0] for h in crsr.description]
     # Convert to Array
     arr = np.asarray(this_week)
-    f = open('exported.csv', 'r')
+    f = open('exported.csv', 'r', encoding='utf-8')
     reader = csv.reader(f)
     mylist = list(reader)
     f.close()
@@ -45,7 +45,7 @@ def singular(header_name, col, quer):
     except IndexError:
         pass
         # saving the work
-    my_new_list = open('exported.csv', 'w', newline='')
+    my_new_list = open('exported.csv', 'w', newline='', encoding='utf-8')
     csv_writer = csv.writer(my_new_list)
     csv_writer.writerows(mylist)
     f.close()
@@ -61,7 +61,7 @@ def multiple(header_name, col, quer):
     col_names = [h[0] for h in crsr.description]
     # Convert to Array
     arr = np.asarray(this_week)
-    f = open('exported.csv', 'r')
+    f = open('exported.csv', 'r', encoding='utf-8')
     reader = csv.reader(f)
     mylist = list(reader)
     f.close()
@@ -78,7 +78,7 @@ def multiple(header_name, col, quer):
     except IndexError:
         pass
     # saving the work
-    my_new_list = open('exported.csv', 'w', newline='')
+    my_new_list = open('exported.csv', 'w', newline='', encoding='utf-8')
     csv_writer = csv.writer(my_new_list)
     csv_writer.writerows(mylist)
     f.close()

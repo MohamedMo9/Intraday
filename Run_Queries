@@ -8,7 +8,7 @@ import numpy as np
 with open('query.csv') as f:
     lines = f.readlines()
 
-user_email = "USER_NAME@transferwise.com"   #REPLACE WITH YOUR EMAIL
+user_email = "NAME@transferwise.com"  # REPLACE WITH YOUR EMAIL
 conn = snowflake.connector.connect(user=user_email,
                                    account='rt27428.eu-central-1',
                                    authenticator="externalbrowser",
@@ -83,7 +83,6 @@ def multiple(header_name, col, quer):
     csv_writer.writerows(mylist)
     f.close()
     my_new_list.close()
-
 
 
 try:
@@ -185,9 +184,5 @@ try:
     multiple("Chat-Concurrency", 86, 13)
 except Exception as e:
     pass
-
-
-
-
 
 print("Data is ready, please import the report to google sheets")
